@@ -1,4 +1,4 @@
-import { Product } from "../domain/product";
+import { Product, Variant} from "../domain/product";
 import {
   getProducts,
   createProduct,
@@ -10,15 +10,6 @@ import {
   GetProductsResult,
 } from "./productService";
 
-// Definir tipo de Variant si no existe
-export interface Variant {
-  id?: number;
-  sku: string;
-  price: number;
-  active: boolean;
-  attributes?: any[];
-  product_id?: number;
-}
 
 export class ProductUseCase {
   async loadProducts(params: GetProductsParams): Promise<GetProductsResult> {

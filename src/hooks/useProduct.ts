@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { ProductUseCase } from "../application/ProductUseCase";
-import { Product } from "../domain/product";
+import { Product} from "../domain/product";
 import { type MRT_PaginationState } from "material-react-table";
 
 export function useProducts() {
