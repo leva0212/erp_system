@@ -1,50 +1,76 @@
 "use client";
+
 import { useState } from "react";
 import ProductsTable from "../../../ui/components/table/ProductsTable";
-import ProductForm from "../../../ui/components/forms/ProductForm";
+import ProductWizard from "../../../ui/components/products/ProductWizard";
 import { useProducts } from "../../../hooks/useProduct";
-import { Dialog } from "@mui/material";
-import { Product, Variant } from "../../../domain/product";
+import { Product } from "../../../domain/product";
+import { useThemeClasses } from "../../../ui/providers/useThemeClasses";
 
 export default function ProductsPage() {
-  const { products, rowCount, pagination, setPagination, globalFilter, setGlobalFilter, useCase } = useProducts();
-  const [editingProduct, setEditingProduct] = useState<Product | null>(null);
-  const [variants, setVariants] = useState<Variant[]>([]);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const {
+    products,
+    rowCount,
+    pagination,
+    setPagination,
+    globalFilter,
+    setGlobalFilter,
+  } = useProducts();
 
-  async function handleEditProduct(product: Product) {
+  const t = useThemeClasses();
+
+  const [editingProduct, setEditingProduct] = useState<Product | null>(null);
+  const [isWizardOpen, setIsWizardOpen] = useState(false);
+
+  function handleEditProduct(product: Product) {
     setEditingProduct(product);
-    const v: Variant[] = await useCase.loadVariants(product.id);
-    setVariants(v);
-    setIsModalOpen(true);
+    setIsWizardOpen(true);
   }
 
-  async function handleSave(product: Product, variants: Variant[]) {
-    await useCase.saveProduct(product, variants);
-    setIsModalOpen(false);
+  function handleNewProduct() {
+    setEditingProduct(null);
+    setIsWizardOpen(true);
   }
 
   return (
-    <div style={{ padding: 20 }}>
-      <h1>Productos</h1>
-      <ProductsTable
-        data={products}
-        rowCount={rowCount}
-        pagination={pagination}
-        globalFilter={globalFilter}
-        onPaginationChange={setPagination}
-        onGlobalFilterChange={setGlobalFilter}
-        onEditProduct={handleEditProduct}
-      />
+    <div className={`${t.background} min-h-screen p-1 md:p-5`}>
+      <div className="w-full md:max-w-7xl md:mx-auto">
 
-      <Dialog open={isModalOpen} onClose={() => setIsModalOpen(false)} fullWidth maxWidth="md">
-        <ProductForm
-          product={editingProduct}
-          variants={variants}
-          onClose={() => setIsModalOpen(false)}
-          onSave={handleSave}
-        />
-      </Dialog>
+        {/* HEADER */}
+        <div className="flex justify-between items-center mb-1">
+          <h1 className={`text-xl font-semibold ${t.text}`}>
+            Productos
+          </h1>
+
+          <button
+            onClick={handleNewProduct}
+            className="px-4 py-2 bg-blue-600 text-white rounded"
+          >
+            + Nuevo producto
+          </button>
+        </div>
+
+        {/* TABLE */}
+        <div className={`${t.surface} ${t.border} rounded-lg shadow-sm p-0 md:p-2`}>
+          <ProductsTable
+            data={products}
+            rowCount={rowCount}
+            pagination={pagination}
+            globalFilter={globalFilter}
+            onPaginationChange={setPagination}
+            onGlobalFilterChange={setGlobalFilter}
+            onEditProduct={handleEditProduct}
+          />
+        </div>
+
+        {isWizardOpen && (
+          <ProductWizard
+            product={editingProduct}
+            onClose={() => setIsWizardOpen(false)}
+          />
+        )}
+
+      </div>
     </div>
   );
 }

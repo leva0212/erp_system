@@ -12,34 +12,33 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-
   const pathname = usePathname();
 
   const isLoginPage = pathname === "/login";
 
   return (
     <html lang="es">
-      <body><ThemeProvider>
+      <body>
+        <ThemeProvider>
 
-        {isLoginPage ? (
-          children
-        ) : (
-          <AuthGuard>
-            <div className="flex h-screen">
+          {isLoginPage ? (
+            children
+          ) : (
+            <AuthGuard>
+              <div className="flex h-screen">
 
-              <Sidebar />
+                <Sidebar />
 
-              <main className="flex-1 bg-gray-100 p-8 overflow-auto">
-                {children}
-              </main>
+                <main className="flex-1 bg-gray-100 p-2 md:p-8 overflow-auto">
+                  {children}
+                </main>
 
-            </div>
-          </AuthGuard>
-        )}
+              </div>
+            </AuthGuard>
+          )}
 
-      </ThemeProvider>
-
+        </ThemeProvider>
       </body>
     </html>
   );
-} 
+}

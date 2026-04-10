@@ -15,10 +15,12 @@ type ProductsTableProps = {
   pagination: MRT_PaginationState;
   globalFilter: string;
   onPaginationChange: (
-    updaterOrValue: MRT_PaginationState | ((old: MRT_PaginationState) => MRT_PaginationState)
+    updaterOrValue:
+      | MRT_PaginationState
+      | ((old: MRT_PaginationState) => MRT_PaginationState),
   ) => void;
   onGlobalFilterChange: (value: string) => void;
-  onEditProduct?: (product: Product) => void; // <-- agregado
+  onEditProduct?: (product: Product) => void;
 };
 
 export default function ProductsTable({
@@ -37,7 +39,7 @@ export default function ProductsTable({
       { accessorKey: "description", header: "Descripción" },
       { accessorKey: "active", header: "Activo" },
     ],
-    []
+    [],
   );
 
   return (
@@ -74,7 +76,8 @@ export default function ProductsTable({
             padding: 6,
             borderRadius: 4,
             border: "1px solid #ccc",
-            width: 250,
+            width: "100%",
+            maxWidth: 250,
           }}
         />
       )}

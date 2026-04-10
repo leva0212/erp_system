@@ -1,5 +1,7 @@
 // src/types.ts
-export type AttributeValue = { id: number; name: string; value: string };
+//export type AttributeValue = { id: number; name: string; value: string };
+
+import { AttributeValue } from "./attribute";
 
 export type Product = {
   id: number;
