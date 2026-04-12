@@ -1,5 +1,5 @@
-import { generateSKU } from "@/src/domain/variants/skuGenerator";
-import type { VariantAttributeValue } from "@/src/domain/variants/variantTypes";
+import { generateSKU } from "@/domain/variants/skuGenerator";
+import type { VariantAttributeValue } from "@/domain/variants/variantTypes";
 
 let sequence = 1;
 
@@ -33,19 +33,21 @@ export function generateVariantsUseCase(input: {
   );
 
   return combinations.map((combo) => {
-    const sku = generateSKU(
-      {
-        name: input.productName,
-      },
-      combo
-    );
+  const sku = generateSKU(
+    {
+      name: input.productName,
+    },
+    combo
+  );
 
-    return {
-      sku,
-      name: combo.map((c) => c.value).join(" - "),
-      price: 0,
-      active: true,
-      attributes: combo,
-    };
-  });
+  return {
+    sku,
+
+    variant_name: `${input.productName} ${combo.map((c) => c.value).join(" ")}`,
+
+    price: 0,
+    active: true,
+    attributes: combo,
+  };
+});
 }

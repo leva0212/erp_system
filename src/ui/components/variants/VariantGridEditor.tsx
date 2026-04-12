@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo } from "react";
-import { useThemeClasses } from "../../providers/useThemeClasses";
+import { useThemeClasses } from "@/theme/useThemeClasses";
  
 export type VariantRow = {
   sku: string;

@@ -10,7 +10,7 @@ const navItems = [
   { name: "Productos", href: "/products" },
   { name: "Clientes", href: "/customers" },
   { name: "Inventario", href: "/inventory" },
-  { name: "Ventas", href: "/sales" },
+  { name: "Ventas", href: "/pos" },
 ];
 
 export default function Sidebar() {

@@ -6,15 +6,15 @@ import {
   updateProduct,
 } from "../../../application/productService";
 
-import { saveVariantsUseCase } from "@/src/application/variants/saveVariantsUseCase";
-import { validateVariantExplosion } from "@/src/application/variants/variantExplosionService";
-import { generateVariantsUseCase } from "@/src/application/variants/generateVariantsUseCase";
+import { saveVariantsUseCase } from "@/application/variants/saveVariantsUseCase";
+import { validateVariantExplosion } from "@/application/variants/variantExplosionService";
+import { generateVariantsUseCase } from "@/application/variants/generateVariantsUseCase";
 
 import VariantGridEditor from "../variants/VariantGridEditor";
-import AttributeSelector from "../variants/AttributeSelector";
+//import AttributeSelector from "../variants/AttributeSelector";
 
-import { useThemeClasses } from "../../providers/useThemeClasses";
-import { getAttributesWithValues } from "@/src/application/attributeService";
+import { useThemeClasses } from "@/theme/useThemeClasses";
+import { getAttributesWithValues } from "@/application/attributeService";
 
 export default function ProductWizard({ product, onClose }: any) {
   const t = useThemeClasses();
@@ -262,12 +262,8 @@ useEffect(() => {
           {step === 2 && (
             <div className="space-y-4">
 
-              <AttributeSelector
-                attributes={attributes}
-                selected={selected}
-                setSelected={setSelected}
-              />
-
+            
+*/
               <button
                 onClick={() => setStep(3)}
                 className={t.buttonPrimary + " px-4 py-2"}

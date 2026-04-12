@@ -18,8 +18,9 @@
         "name": "next"
       }
     ],
-    "paths": {
-      "@/*": ["./*"]
+  
+     "paths": {
+      "@/*": ["./src/*"]
     }
   },
   "include": [
@@ -29,6 +30,6 @@
     ".next/types/**/*.ts",
     ".next/dev/types/**/*.ts",
     "**/*.mts"
-  ],
+, "src/ui/components/sales/SalesDocumentPaymentPanel.tsx"  ],
   "exclude": ["node_modules"]
 }

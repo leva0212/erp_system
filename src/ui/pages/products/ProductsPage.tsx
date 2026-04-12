@@ -5,7 +5,9 @@ import ProductsTable from "../../../ui/components/table/ProductsTable";
 import ProductWizard from "../../../ui/components/products/ProductWizard";
 import { useProducts } from "../../../hooks/useProduct";
 import { Product } from "../../../domain/product";
-import { useThemeClasses } from "../../../ui/providers/useThemeClasses";
+import { ThemeProvider } from  "@/theme/ThemeProvider";
+import { theme } from "@/theme/theme";
+import { useThemeClasses } from "@/theme/useThemeClasses";
 
 export default function ProductsPage() {
   const {
@@ -17,7 +19,7 @@ export default function ProductsPage() {
     setGlobalFilter,
   } = useProducts();
 
-  const t = useThemeClasses();
+  const tema = useThemeClasses();
 
   const [editingProduct, setEditingProduct] = useState<Product | null>(null);
   const [isWizardOpen, setIsWizardOpen] = useState(false);
@@ -33,12 +35,12 @@ export default function ProductsPage() {
   }
 
   return (
-    <div className={`${t.background} min-h-screen p-1 md:p-5`}>
+    <div className={`${tema.background} min-h-screen p-1 md:p-5`}>
       <div className="w-full md:max-w-7xl md:mx-auto">
 
         {/* HEADER */}
         <div className="flex justify-between items-center mb-1">
-          <h1 className={`text-xl font-semibold ${t.text}`}>
+          <h1 className={`text-xl font-semibold ${tema.text}`}>
             Productos
           </h1>
 
@@ -51,7 +53,7 @@ export default function ProductsPage() {
         </div>
 
         {/* TABLE */}
-        <div className={`${t.surface} ${t.border} rounded-lg shadow-sm p-0 md:p-2`}>
+        <div className={`${tema.surface} ${tema.border} rounded-lg shadow-sm p-0 md:p-2`}>
           <ProductsTable
             data={products}
             rowCount={rowCount}

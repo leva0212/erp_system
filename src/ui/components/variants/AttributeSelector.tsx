@@ -1,7 +1,7 @@
-"use client";
+/*"use client";
 
 import { Attribute, AttributeValue } from "@/src/domain/attribute";
-import { useThemeClasses } from "../../providers/useThemeClasses";
+import { useThemeClasses } from "@/theme/useThemeClasses";
 
 type AttributeWithValues = Attribute & {
   values: AttributeValue[];
@@ -49,12 +49,14 @@ export default function AttributeSelector({
           key={attr.id}
           className={`${t.surface} ${t.border} border rounded-lg p-4`}
         >
-          {/* ATTRIBUTE NAME */}
+          {/* ATTRIBUTE NAME */
+        
+        /*}
           <div className={`font-semibold mb-3 ${t.text}`}>
             {attr.name}
           </div>
 
-          {/* VALUES */}
+          {/* VALUES *//*}
           <div className="flex flex-wrap gap-2">
             {attr.values.map((val) => {
               const isSelected =
@@ -82,4 +84,4 @@ export default function AttributeSelector({
       ))}
     </div>
   );
-}
+}*/ 

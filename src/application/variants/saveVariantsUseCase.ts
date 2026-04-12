@@ -1,4 +1,4 @@
-import { saveVariants } from "@/src/infrastructure/repositories/variantRepository";
+import { saveVariants } from "@/infrastructure/repositories/variantRepository";
 
  
 export async function saveVariantsUseCase(
