@@ -1,6 +1,6 @@
-import { SalesDocumentItem } from "@/src/domain/sales/SalesDocumentItem"
+import { SalesDocumentItem } from "@/domain/sales/SalesDocumentItem"
 
-import { supabase } from "@/src/infrastructure/supabaseClient"
+import { supabase } from "@/infrastructure/supabaseClient"
 import { calculateTotals } from "../services/salesCalculator"
 
 export async function addSalesItem(input: {
@@ -29,7 +29,7 @@ export async function addSalesItem(input: {
     existing.subtotal =
       existing.price * existing.quantity
   } else {
-    items.push({
+    /*items.push({
       document_id: input.document_id,
       variant_id: input.variant.id,
       sku: input.variant.sku,
@@ -38,7 +38,7 @@ export async function addSalesItem(input: {
       quantity: 1,
       discount_percent: 0,
       subtotal: input.variant.price,
-    })
+    })*/
   }
 
   const totals = calculateTotals(items)

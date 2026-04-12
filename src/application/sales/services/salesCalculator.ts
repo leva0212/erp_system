@@ -1,4 +1,4 @@
-import { SalesDocumentItem } from "@/src/domain/sales/SalesDocumentItem"
+import { SalesDocumentItem } from "@/domain/sales/SalesDocumentItem"
 
 function money(v: number) {
   return Number((v || 0).toFixed(2))

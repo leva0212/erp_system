@@ -1,4 +1,4 @@
-import { createSalesDocumentRepo } from "@/src/infrastructure/repositories/salesDocumentRepository"
+import { createSalesDocumentRepo } from "@/infrastructure/repositories/salesDocumentRepository"
 import { calculateTotals } from "../services/salesCalculator"
  
 

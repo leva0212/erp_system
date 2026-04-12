@@ -1,7 +1,7 @@
-import { createPayment, getTotalPaid } from "@/src/infrastructure/repositories/paymentRepository"
-import { getSalesDocumentById } from "@/src/infrastructure/repositories/salesDocumentRepository"
+import { createPayment, getTotalPaid } from "@/infrastructure/repositories/paymentRepository"
+import { getSalesDocumentById } from "@/infrastructure/repositories/salesDocumentRepository"
  
-import { supabase } from "@/src/infrastructure/supabaseClient"
+import { supabase } from "@/infrastructure/supabaseClient"
 import { updateStatus } from "../services/salesStateEngine";
 
 export async function addPayment(input: {
