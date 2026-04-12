@@ -12,7 +12,7 @@ import {
   Box,
 } from "@mui/material";
 import { MaterialReactTable, MRT_ColumnDef } from "material-react-table";
-import { searchVariantsUseCase } from "@/src/application/variants/searchVariantsUseCase";
+import { searchVariantsUseCase } from "@/application/variants/searchVariantsUseCase";
 
 type Variant = {
   id: number;

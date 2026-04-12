@@ -1,4 +1,4 @@
-import { supabase } from "@/src/infrastructure/supabaseClient";
+import { supabase } from "@/infrastructure/supabaseClient";
 
 export async function updateUserProfile(displayName: string, photoUrl: string) {
 

@@ -3,9 +3,9 @@
 import { useMemo, useState } from "react";
 import VariantPreviewTable from "./VariantPreviewTable";
 
-import { generateVariantsUseCase } from "@/src/application/variants/generateVariantsUseCase";
-import { saveVariantsUseCase } from "@/src/application/variants/saveVariantsUseCase";
-import { validateVariantExplosion } from "@/src/application/variants/variantExplosionService";
+import { generateVariantsUseCase } from "@/application/variants/generateVariantsUseCase";
+import { saveVariantsUseCase } from "@/application/variants/saveVariantsUseCase";
+import { validateVariantExplosion } from "@/application/variants/variantExplosionService";
 export default function VariantModal({
   product,
   attributes,

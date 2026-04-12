@@ -3,7 +3,7 @@
 import { useState } from "react";
 
 import VariantBulkEditor from "./VariantBulkEditor";
-import { generateVariantsUseCase } from "@/src/application/variants/generateVariantsUseCase";
+import { generateVariantsUseCase } from "@/application/variants/generateVariantsUseCase";
 import VariantPreviewTable from "./VariantPreviewTable";
 export default function VariantBuilderDialog({
   product,
