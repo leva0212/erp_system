@@ -1,4 +1,4 @@
-export interface SalesDocumentItem {
+export type SalesDocumentItem = {
   variant_id: number
 
   sku: string
@@ -6,11 +6,20 @@ export interface SalesDocumentItem {
 
   quantity: number
 
-  base_price: number   // referencia
-  price: number        // 🔥 editable por venta
+  price: number
+  base_subtotal: number
 
-  discount_amount: number
   discount_percent: number
+  discount_amount: number
+
+  tax_percent: number
+  tax_amount: number
 
   subtotal: number
+
+  max_discount_percent: number
+  allow_discount: boolean
+
+  // 🔥 FALTABA ESTE
+  cost: number
 }

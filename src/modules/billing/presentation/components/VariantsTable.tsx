@@ -8,41 +8,70 @@ import {
 import { MRT_Localization_ES } from "material-react-table/locales/es"
 import { useQuery } from "@tanstack/react-query"
 import { supabase } from "@/modules/shared/lib/supabaseClient"
-
-type Variant = {
-  id: number
-  sku: string
-  variant_name: string
-  price: number
-}
+import { Variant } from "@/modules/products/domain/variant"
 
 export default function VariantsTable({
   globalFilter,
   onGlobalFilterChange,
   onSelect,
+  inputRef, // 👈 agregado
 }: {
   globalFilter: string
   onGlobalFilterChange: (v: string) => void
   onSelect: (variant: any) => void
+  inputRef?: React.RefObject<HTMLInputElement | null> // 👈 agregado
 }) {
-  const { data = [] } = useQuery({
+  const { data = [] } = useQuery<Variant[]>({
     queryKey: ["variants", globalFilter],
-    queryFn: async () => {
+
+    queryFn: async (): Promise<Variant[]> => {
       let query = supabase
         .from("variants")
         .select("id, sku, price, variant_name")
         .limit(50)
 
-      if (globalFilter) {
-        query = query.ilike(
-          "variant_name",
-          `%${globalFilter}%`
-        )
+      if (globalFilter.trim()) {
+        const terms = globalFilter
+          .trim()
+          .split(/\s+/)
+          .map(term => term.trim())
+          .filter(Boolean)
+
+        if (terms.length > 0) {
+          const orQuery = terms
+            .map(term => {
+              const conditions: string[] = []
+
+              // 🔎 Nombre (parcial, usa pg_trgm)
+              conditions.push(`variant_name.ilike.%${term}%`)
+
+              // 🎯 ID exacto (solo si es número)
+              if (!isNaN(Number(term))) {
+                conditions.push(`id.eq.${term}`)
+              }
+
+              // 🎯 SKU exacto
+              conditions.push(`sku.eq.${term}`)
+
+              // 🔎 SKU parcial
+              conditions.push(`sku.ilike.%${term}%`)
+
+              return conditions.join(",")
+            })
+            .join(",")
+
+          query = query.or(orQuery)
+        }
       }
 
-      const { data } = await query
+      const { data, error } = await query
 
-      return data || []
+      if (error) {
+        console.error(error)
+        return []
+      }
+
+      return (data ?? []) as Variant[]
     },
   })
 
@@ -51,7 +80,18 @@ export default function VariantsTable({
       { accessorKey: "id", header: "ID", size: 50 },
       { accessorKey: "sku", header: "Código" },
       { accessorKey: "variant_name", header: "Nombre" },
-      { accessorKey: "price", header: "Precio" },
+      {
+        accessorKey: "price",
+        header: "Precio",
+        Cell: ({ cell }) => {
+          const value = cell.getValue<number>() ?? 0
+
+          return value.toLocaleString("es-CR", {
+            style: "currency",
+            currency: "CRC",
+          })
+        },
+      },
     ],
     []
   )
@@ -65,10 +105,16 @@ export default function VariantsTable({
       enablePagination
       enableTopToolbar
       localization={MRT_Localization_ES}
+      muiTableContainerProps={{
+        sx: {
+          maxHeight: "250px",
+        },
+      }}
       renderTopToolbarCustomActions={() => (
         <input
+          ref={inputRef} // 👈 agregado
           type="text"
-          placeholder="Buscar variantes..."
+          placeholder="Buscar productos..."
           value={globalFilter}
           onChange={e => onGlobalFilterChange(e.target.value)}
           style={{

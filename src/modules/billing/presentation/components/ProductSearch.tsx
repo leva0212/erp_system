@@ -64,7 +64,7 @@ export default function ProductSearch({
 
   return (
     <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
-      <div className={`${t.surface} w-[500px] p-4 rounded shadow`}>
+      <div className={`${t.surface} w-[500px]  p-4 rounded shadow`}>
         
         <input
           autoFocus
@@ -90,7 +90,7 @@ export default function ProductSearch({
               onClose()
             }
           }}
-          placeholder="Buscar variante..."
+          placeholder="Buscar producto..."
           className={`w-full p-2 mb-2 border ${t.input}`}
         />
 
